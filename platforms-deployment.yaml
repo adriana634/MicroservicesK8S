@@ -15,6 +15,19 @@ spec:
       containers:
         - name: platformservice
           image: adriana634/platformservice:latest
+          env:
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "Staging"
+            - name: CommandService
+              valueFrom:
+                secretKeyRef:
+                  name: platforms-env
+                  key: CommandService
+            - name: ConnectionStrings__Platforms
+              valueFrom:
+                secretKeyRef:
+                  name: platforms-env
+                  key: PlatformsDB
 ---
 apiVersion: v1
 kind: Service
